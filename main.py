@@ -135,34 +135,6 @@ async def _hentiestream(ctx):
     else:
         await ctx.send('Only usable in NSFW channels')
 
-@slash.slash(name='UncensoredHentieStream',
-             description='Pragz the Chad deserves uncensored quality',
-             guild_ids=guildids)
-async def _UncensoredHentieStream(ctx):
-    author = ctx.author.id
-    if author==294688998620921858:
-        channel_nsfw = ctx.channel.is_nsfw()
-        if channel_nsfw:
-            nsfw = True
-        else:
-            nsfw = False
-        if nsfw:
-            x = lmaooo.getposts('hentai', 20)
-            file = open('temp.txt')
-            linkylist = eval(file.read())
-            for x in linkylist:
-                if 'redgif' or 'gyfcat' or 'i.redd' or 'imgur' in x:
-                    await ctx.send(x)
-                else:
-                    post = discord.Embed(title="'_'")
-                    post.set_image(url=x)
-                    await ctx.send(post)
-        else:
-            await ctx.send('Only usable in NSFW channels')
-    else:
-        await ctx.send('This command is only for Pragz')
-
-
 @slash.slash(name='Dankmemestream',
              description='See top 20 memes from today',
              guild_ids=guildids)
