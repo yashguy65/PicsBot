@@ -205,7 +205,7 @@ async def on_message(message):
         file = open('temp.txt')
         linkylist = eval(file.read())
         for x in linkylist:
-            await ctx.send(x)
+            await message.channel.send(x)
 
     if message.content.startswith(
             'pls dankmemestream') or message.content.startswith(
@@ -214,7 +214,7 @@ async def on_message(message):
         file = open('temp.txt')
         linkylist = eval(file.read())
         for x in linkylist:
-            await ctx.send(x)
+            await message.channel.send(x)
 
 
 @client.event
