@@ -41,28 +41,6 @@ def makeids():
     for guild in client.guilds:
         guildids.append(guild.id)
 
-@slash.slash(name='Hentie',
-             description='A command to get nsfw hentie pics',
-             guild_ids=guildids)
-async def _Hentie(ctx):
-    channel_nsfw = ctx.channel.is_nsfw()
-    if channel_nsfw:
-        nsfw = True
-    else:
-        nsfw = False
-    if nsfw:
-        x = getrandom('hentie')
-        if 'redgif' or 'gyfcat' or 'i.redd' or 'imgur' in x:
-            x = "|| " + x + " ||"
-            await ctx.send(x)
-        else:
-            post = discord.Embed(title="'_'")
-            post.set_image(url=x)
-            await ctx.send(content='embed', embed=[post])
-    else:
-        await ctx.send('Only usable in NSFW channels')
-
-
 @slash.slash(name='Eyebleach',
              description='A command to get a random eyebleach pic',
              guild_ids=guildids)
@@ -158,9 +136,6 @@ async def on_ready():
     return await client.change_presence(
         activity=discord.Activity(type=3, name='Memestream'))
 
-
-
-
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -171,6 +146,20 @@ async def on_message(message):
         nsfw = True
     else:
         nsfw = False
+
+    if message.content.startswith('pls bubblewrap') or message.content.startswith('Pls bubblewrap'):
+        await message.channel.send("||POP|| " * 60)
+
+    if message.content.startswith(
+            'pls eyebleach') or message.content.startswith('Pls eyebleach'):
+        titl = 'Best served with bleach'
+        x = getrandom('bleach')
+        if 'imgur' or 'gyfcat' or 'i.redd' in x:
+            await message.channel.send(x)
+        else:
+            post = discord.Embed(title=titl)
+            post.set_image(url=x)
+            await message.channel.send(embed=post)
 
     if message.content.startswith('pls hentie') or message.content.startswith(
             'Pls hentie'):
@@ -187,17 +176,6 @@ async def on_message(message):
             #await bot.send_message(ctx.message.channel, embed = embed)
         else:
             await message.channel.send('Only usable in NSFW channels')
-
-    if message.content.startswith(
-            'pls eyebleach') or message.content.startswith('Pls eyebleach'):
-        titl = 'Best served with bleach'
-        x = getrandom('bleach')
-        if 'imgur' or 'gyfcat' or 'i.redd' in x:
-            await message.channel.send(x)
-        else:
-            post = discord.Embed(title=titl)
-            post.set_image(url=x)
-            await message.channel.send(embed=post)
 
     if message.content.startswith(
             'pls memestream') or message.content.startswith('Pls memestream'):
